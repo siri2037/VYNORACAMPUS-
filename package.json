@@ -1,0 +1,23 @@
+{
+  "name": "vynora-connect",
+  "version": "1.0.0",
+  "description": "Vynora Connect - Student Networking Platform (Communication & Notifications Module)",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "start:backend": "npm --prefix backend start",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview"
+  },
+  "keywords": [
+    "student-networking",
+    "vynora-connect",
+    "communication",
+    "notifications",
+    "chat"
+  ],
+  "author": "",
+  "license": "ISC"
+}

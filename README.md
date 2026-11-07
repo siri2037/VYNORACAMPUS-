@@ -1,465 +1,101 @@
-# 🚀 Vynora Campus+
+# Vynora Connect — Communication & Notifications Module
 
-> **One campus. One community. One platform.**
-
-Vynora Campus+ is a student-focused full-stack platform designed to connect students within a university and make everyday campus life easier.
-
-The project is being developed **first for our own university**, with the long-term vision of creating a configurable platform that can be adapted for different colleges and universities according to their students, departments, academic structure, facilities, and requirements.
+A full-stack student networking and collaboration module built with **React + Vite + Tailwind CSS**, **Node.js + Express**, **MongoDB Atlas + Mongoose**, and **Socket.IO**.
 
 ---
 
-## 🎯 Vision
+## 🌟 Architecture & Features
 
-Students use many different platforms for different parts of college life:
+### 1. Frontend (`frontend/`)
+- **React 18 + Vite**: Lightning-fast responsive student portal.
+- **Tailwind CSS**: Custom student networking design system (`brand-500` royal blue, presence indicators, notification badges).
+- **Communication Inbox**:
+  - Left pane: Conversation search, filter pills (*All*, *Direct*, *Study Groups*, *Unread*), and *New Chat* modal.
+  - Right pane: Active message stream with delivery receipts, student prompts, voice/video sync stubs.
+  - Fully responsive: Switches smoothly to full-screen chat on mobile with back navigation.
+- **Notification Center**:
+  - Filter tabs for *Mentions*, *Messages*, and *System & Deadlines*.
+  - Mark single or all notifications as read.
+- **Notification Preferences**:
+  - Custom toggles for push alerts, campus email digests, and exam quiet hours.
 
-* Finding classmates and people with similar interests
-* Sharing notes and learning resources
-* Finding teammates for hackathons and projects
-* Communicating with other students
-* Tracking coding progress
-* Managing class schedules
-* Finding available rooms
-* Collaborating on activities and projects
-
-**Vynora Campus+ aims to bring these experiences together in one student-only platform.**
-
----
-
-## 💡 Problem
-
-Students often struggle to:
-
-* Find students with similar technical interests
-* Find teammates from other departments for hackathons
-* Access useful notes and resources
-* Discover students with specific skills
-* Communicate and collaborate efficiently
-* Keep track of their academic schedule
-* Find available campus rooms
-* Coordinate small campus activities
-
-Most of these activities are scattered across different applications, messaging groups, and physical campus networks.
-
-Vynora Campus+ aims to create a **central digital campus community** for students.
+### 2. Backend (`backend/`)
+- **Node.js + Express**: RESTful API endpoints with structured controllers and centralized error handling.
+- **Mongoose Database Models**:
+  - `Conversation`: Direct 1-on-1 and multi-member study groups.
+  - `Message`: Chat messages with timestamps, read receipts, and attachment metadata.
+  - `Notification`: Student alerts for mentions, new messages, and deadlines.
+  - `NotificationSetting`: User delivery preferences and quiet hour schedules.
+- **Real-Time Socket.IO**:
+  - Room-based real-time broadcasting (`join_conversation`, `send_message`, `new_message`).
+  - Real-time notification emission.
+  - Presence tracking (online/offline student indicators).
+- **Zero-Friction Fallback**:
+  - If a MongoDB Atlas URI is not yet configured in `backend/.env`, the server automatically operates in development in-memory mode so APIs and sockets remain fully testable!
 
 ---
 
-## ✨ Planned Features
+## 🚀 Quick Start Guide
 
-### 🔐 Student Authentication
+### 1. Start Both Frontend and Backend
 
-* Google-based authentication
-* University student verification
-* Secure student profiles
-* College-specific access
+Open two terminal windows:
 
-### 👤 Student Profiles
-
-Students can showcase:
-
-* Name
-* Department
-* Year
-* Skills
-* Interests
-* GitHub profile
-* LeetCode profile
-* Profile picture
-* Projects and achievements
-
-### 📊 Student Dashboard
-
-A personalized dashboard containing:
-
-* Coding streak
-* GitHub statistics
-* LeetCode statistics
-* Upcoming classes
-* Important activities
-* Quick access to campus features
-
-### 🤝 Student Networking
-
-Students can:
-
-* Discover other students
-* Search by skills
-* Search by department
-* Search by interests
-* View profiles
-* Connect with other students
-
-### 💬 Real-Time Chat
-
-Students can communicate through:
-
-* One-to-one conversations
-* Project conversations
-* Hackathon team conversations
-* Real-time messaging
-* Notifications
-
-### 📝 Notes & Resource Sharing
-
-Students can:
-
-* Upload notes
-* Share study resources
-* Search resources
-* Filter resources by subject
-* Download shared materials
-
-### 🏆 Hackathon & Project Team Formation
-
-Students can create projects and specify the skills they need.
-
-Example:
-
-```text
-Project: Campus Security System
-
-Looking for:
-
-✓ ML Engineer
-✓ Backend Developer
-✓ Frontend Developer
-✓ UI/UX Designer
+#### Terminal 1 — Backend Server:
+```powershell
+cd backend
+npm start
 ```
+> Server runs at: **http://localhost:5000**  
+> REST API Base: **http://localhost:5000/api**  
+> Health check: **http://localhost:5000/api/health**
 
-Students from different departments can discover projects and request to join teams.
-
-### 📅 Timetable
-
-Students can view:
-
-* Daily classes
-* Weekly timetable
-* Subjects
-* Faculty information
-* Classrooms
-* Free periods
-
-### 🏫 Free Room Finder
-
-Students can check which campus rooms are available during a particular time period.
-
-### 🍱 Campus Order Assistance
-
-A future feature where students can request help with collecting food/orders when they are unable to reach the campus canteen because of classes.
-
-Students nearby can accept the request and receive a small reward.
-
-> This feature is planned for a later version because it requires additional considerations such as payments, verification, safety, transactions, and dispute handling.
-
-### 🎵 Collaborative Playlists
-
-Students can create and collaborate on playlists for:
-
-* Study sessions
-* Events
-* Clubs
-* Projects
-* Campus activities
-
----
-
-# 🏗️ Technology Stack
-
-Vynora Campus+ is being developed using the MERN stack.
-
-### Frontend
-
-* React
-* TypeScript
-* Tailwind CSS
-
-### Backend
-
-* Node.js
-* Express.js
-* TypeScript
-
-### Database
-
-* MongoDB
-* Mongoose
-
-### Real-Time Communication
-
-* Socket.IO
-
-### Authentication
-
-* Google OAuth
-
-### Development & Collaboration
-
-* Git
-* GitHub
-* Pull Requests
-* Code Reviews
-
-### Deployment
-
-Planned deployment technologies include:
-
-* Vercel
-* MongoDB Atlas
-* Cloud hosting for the backend
-
----
-
-# 🧩 High-Level Architecture
-
-```text
-                    VYNORA CAMPUS+
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │ React Frontend  │
-                  │ TypeScript      │
-                  │ Tailwind CSS    │
-                  └────────┬────────┘
-                           │
-                           │ HTTP / REST
-                           ▼
-                  ┌─────────────────┐
-                  │ Node + Express  │
-                  │ Backend API     │
-                  └───────┬─┬───────┘
-                          │ │
-              ┌───────────┘ └───────────┐
-              ▼                         ▼
-       ┌──────────────┐          ┌──────────────┐
-       │   MongoDB    │          │   Socket.IO  │
-       │   Database   │          │  Real-Time   │
-       └──────────────┘          └──────────────┘
-              │
-              ▼
-       ┌─────────────────┐
-       │ External APIs   │
-       │ GitHub/others   │
-       └─────────────────┘
+#### Terminal 2 — Frontend Application:
+```powershell
+cd frontend
+npm run dev
 ```
+> Web Application: **http://localhost:5173**
 
 ---
 
-# 🌎 Long-Term Vision
+## 🍃 MongoDB Atlas Configuration
 
-Vynora Campus+ is initially being developed for **our university**.
-
-The long-term goal is to make the platform configurable for multiple colleges and universities.
-
-```text
-                    Vynora Campus+
-                          │
-             ┌────────────┴────────────┐
-             ▼                         ▼
-        University A              University B
-             │                         │
-      College Configuration      College Configuration
-             │                         │
-             ▼                         ▼
-          Students                  Students
-```
-
-Each college should eventually be able to configure:
-
-* Departments
-* Courses
-* Academic years
-* Subjects
-* Timetables
-* Rooms
-* Campus facilities
-* Student verification
-* Available features
-* College-specific requirements
-
-This approach allows Vynora Campus+ to evolve from a university project into a **multi-college campus platform**.
+When your team provides your MongoDB Atlas cluster connection string:
+1. Open `backend/.env`.
+2. Add your connection string:
+   ```env
+   MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/vynora_connect?retryWrites=true&w=majority
+   ```
+3. Restart the backend server (`npm start`). Mongoose will automatically connect and persist all messages and notifications.
 
 ---
 
-# 👨‍💻 Development Philosophy
+## 📡 REST API Reference
 
-Vynora Campus+ is being developed by a team of five students.
-
-Our goal is not only to build the application, but also to learn **real-world software engineering practices**.
-
-We are following a learn-and-build approach:
-
-```text
-Learn MERN Concept
-       ↓
-Understand the Concept
-       ↓
-Apply it to Vynora Campus+
-       ↓
-Build a Feature
-       ↓
-Git Commit
-       ↓
-Pull Request
-       ↓
-Code Review
-       ↓
-Merge
-```
-
-Every team member will work across different parts of the stack so that the project becomes a **shared learning experience**, rather than separate frontend/backend work.
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/health` | Backend status, uptime, and MongoDB connection state |
+| `GET` | `/api/conversations` | List all conversations for the student |
+| `POST` | `/api/conversations` | Create a new student direct or group chat |
+| `GET` | `/api/conversations/:id` | Fetch conversation details |
+| `GET` | `/api/conversations/:id/messages` | Fetch message history for a conversation |
+| `POST` | `/api/conversations/:id/messages` | Send a new message inside a conversation |
+| `GET` | `/api/notifications` | Fetch student notification feed |
+| `PATCH` | `/api/notifications/:id/read` | Mark a specific notification as read |
+| `PATCH` | `/api/notifications/read-all` | Mark all notifications as read |
+| `GET` | `/api/notifications/settings` | Get student notification preferences |
+| `PUT` | `/api/notifications/settings` | Update student notification preferences |
 
 ---
 
-# 🌱 Current Development Stage
+## ⚡ Real-Time Socket.IO Events
 
-The project is currently in the **initial development stage**.
-
-### Current focus
-
-* JavaScript fundamentals
-* Git & GitHub
-* Team collaboration
-* React fundamentals
-* MERN architecture
-* Project planning
-* UI/UX design
-
-### Upcoming milestones
-
-```text
-JavaScript
-    ↓
-React
-    ↓
-Node.js
-    ↓
-Express.js
-    ↓
-MongoDB
-    ↓
-Authentication
-    ↓
-Campus+ MVP
-    ↓
-Testing
-    ↓
-Deployment
-    ↓
-University Pilot
-    ↓
-Multi-College Platform
-```
-
----
-
-# 👥 Team
-
-### Vynora Campus+ Development Team
-
-| Member    | Role                 |
-| --------- | -------------------- |
-| Karthik   | Full-Stack Developer |
-| Ram       | Full-Stack Developer |
-| Deep      | Full-Stack Developer |
-| Varshitha | Full-Stack Developer |
-| SR        | Full-Stack Developer |
-
-> Roles will rotate during development so that every member gains experience across the MERN stack.
-
----
-
-# 🤝 GitHub Workflow
-
-We use a collaborative Git workflow.
-
-```text
-Issue
-  ↓
-Feature Branch
-  ↓
-Development
-  ↓
-Commit
-  ↓
-Push
-  ↓
-Pull Request
-  ↓
-Code Review
-  ↓
-Testing
-  ↓
-Merge
-```
-
-### Branches
-
-```text
-main
-development
-feature/*
-```
-
-Direct pushes to `main` are avoided.
-
----
-
-# 📚 Learning Approach
-
-We are learning MERN while building Vynora Campus+.
-
-Instead of completing a course first and building a project later, we follow:
-
-> **Learn → Build → Review → Understand → Improve**
-
-The project serves as our practical environment for learning full-stack development.
-
----
-
-# 🎓 Project Purpose
-
-Vynora Campus+ is being developed as:
-
-* A practical MERN learning project
-* A real-world software engineering project
-* A university-focused platform
-* A collaborative team project
-* A portfolio and placement project
-* A foundation for a potential multi-college product
-
----
-
-# 🔮 Future Possibilities
-
-Future versions may include:
-
-* College administration dashboard
-* Clubs and communities
-* Campus events
-* Announcements
-* Placement preparation
-* Project showcase
-* Student achievement profiles
-* Advanced team matching
-* Campus marketplace
-* Food/order assistance
-* Collaborative playlists
-* Multi-college SaaS architecture
-
----
-
-## ⭐ Our Goal
-
-**Build something useful enough that students actually want to use it.**
-
-**Learn enough that every team member can explain how it works.**
-
-**Engineer it well enough that it can grow beyond our university.**
-
----
-
-## 📌 Status
-
-**Vynora Campus+ — 🚧 Under Active Development**
-
-Built with ❤️ by a team of five students.
+| Event Name | Direction | Payload / Description |
+| :--- | :--- | :--- |
+| `join_conversation` | Client → Server | `{ conversationId }` — Joins the conversation room |
+| `leave_conversation` | Client → Server | `{ conversationId }` — Leaves the conversation room |
+| `send_message` | Client → Server | `{ conversationId, text, senderId, senderName }` |
+| `new_message` | Server → Client | Broadcasts live message to conversation room members |
+| `new_notification` | Server → Client | Broadcasts live alert badge to recipient sockets |
+| `presence_update` | Server → Client | Emits online/offline presence changes |
